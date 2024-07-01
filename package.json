@@ -1,0 +1,104 @@
+{
+	"name": "@zaions/react-tool-kit",
+	"version": "0.0.1",
+	"description": "Zaions React Tool Kit, this is react projects tool kit created by Zaions Dev Team (https://zaions.com). We hope you will love this and all other packages we have developed for you, please do react out if you face any issue in packages we deliver. Once again have fun while working with these packages and let us know your feedback, it keeps us motivated. Have a great day :)",
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"dev": "tsup --watch",
+		"build": "tsup",
+		"test": "vitest"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/zaions/react-tool-kit.git"
+	},
+	"keywords": [
+		"zaions",
+		"tools",
+		"kit",
+		"tool kit",
+		"util",
+		"helpers",
+		"constants",
+		"functions",
+		"server",
+		"client",
+		"nodejs",
+		"typescript",
+		"types",
+		"tests",
+		"aoneahsan",
+		"ahsan mahmood",
+		"zaions packages"
+	],
+	"author": {
+		"name": "Zaions",
+		"email": "admin@zaions.com",
+		"url": "https://zaions.com/bio"
+	},
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/zaions/react-tool-kit/issues"
+	},
+	"homepage": "https://github.com/zaions/react-tool-kit#readme",
+	"engines": {
+		"node": ">=22.2.0",
+		"npm": ">=10.7.0",
+		"yarn": ">=1.22.22"
+	},
+	"packageManager": "yarn@1.22.22",
+	"peerDependencies": {
+		"@capacitor/browser": "^6.0.1",
+		"@capacitor/core": "^6.1.0",
+		"@capacitor/preferences": "^6.0.1",
+		"@capacitor/toast": "^6.0.1",
+		"crypto-js": "^4.2.0",
+		"dayjs": "^1.11.11",
+		"react": "^18.3.1",
+		"react-toastify": "^10.0.5",
+		"zod": "^3.23.8"
+	},
+	"devDependencies": {
+		"@capacitor/browser": "^6.0.1",
+		"@capacitor/core": "^6.1.0",
+		"@capacitor/preferences": "^6.0.1",
+		"@capacitor/toast": "^6.0.1",
+		"@types/crypto-js": "^4.2.2",
+		"@types/node": "^20.14.9",
+		"@types/react": "^18.3.3",
+		"crypto-js": "^4.2.0",
+		"dayjs": "^1.11.11",
+		"react": "^18.3.1",
+		"react-toastify": "^10.0.5",
+		"ts-node": "^10.9.2",
+		"tsup": "^8.1.0",
+		"typescript": "^5.5.2",
+		"vitest": "^1.6.0",
+		"zod": "^3.23.8"
+	},
+	"contributors": [
+		{
+			"name": "Ahsan Mahmood",
+			"email": "aoneahsan@gmail.com",
+			"url": "https://aoneahsan.com"
+		}
+	],
+	"displayName": "Zaions Tool Kit",
+	"engineStrict": true,
+	"funding": {
+		"type": "individual",
+		"url": "https://www.patreon.com/zaions"
+	},
+	"private": false,
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/@zaions/react-tool-kit",
+		"tag": "latest"
+	},
+	"pricing": "Free"
+}

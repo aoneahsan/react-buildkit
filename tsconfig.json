@@ -23,6 +23,7 @@
 		"forceConsistentCasingInFileNames": true,
 
 		"strict": true,
+		"jsx": "react-jsx",
 
 		"skipLibCheck": true /* Skip type checking all .d.ts files. */
 	},

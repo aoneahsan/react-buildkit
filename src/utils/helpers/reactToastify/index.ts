@@ -1,5 +1,5 @@
 import { ReactToastifyTypeEnum } from '@enums/reactPackages';
-import { ztkMessages } from '@zaions/tool-kit';
+import { ztkMessages } from 'zaions-tool-kit';
 import { ToastContent, ToastOptions, toast } from 'react-toastify';
 
 export const showNotification = (

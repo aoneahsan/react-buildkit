@@ -3,7 +3,7 @@ import {
 	SearchParamKeysEnum,
 	decryptData,
 	encryptData,
-} from '@zaions/tool-kit';
+} from 'zaions-tool-kit';
 
 export const setSearchParamsData = (
 	data: unknown,

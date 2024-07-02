@@ -1,4 +1,4 @@
-import { ResponseCodeEnum, ResponseStatusEnum } from '@zaions/tool-kit';
+import { ResponseCodeEnum, ResponseStatusEnum } from 'zaions-tool-kit';
 
 interface IApiResponseResult<T> {
 	data?: T;

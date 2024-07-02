@@ -1,5 +1,5 @@
 import { RegisterFormFieldsEnum } from '@enums/formData';
-import { FormFieldType } from '@zaions/tool-kit';
+import { FormFieldType } from 'zaions-tool-kit';
 
 export const loginFormFields = {
 	[RegisterFormFieldsEnum.email]: {

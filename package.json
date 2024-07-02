@@ -57,29 +57,29 @@
 		"@capacitor/core": "^6.1.0",
 		"@capacitor/preferences": "^6.0.1",
 		"@capacitor/toast": "^6.0.1",
-		"crypto-js": "^4.2.0",
-		"dayjs": "^1.11.11",
 		"react": "^18.3.1",
 		"react-toastify": "^10.0.5",
-		"zod": "^3.23.8"
+		"formik": "^2.4.6",
+		"react-dropzone": "^14.2.3",
+		"classnames": "^2.5.1",
+		"zaions-tool-kit": "*"
 	},
 	"devDependencies": {
 		"@capacitor/browser": "^6.0.1",
 		"@capacitor/core": "^6.1.0",
 		"@capacitor/preferences": "^6.0.1",
 		"@capacitor/toast": "^6.0.1",
-		"@types/crypto-js": "^4.2.2",
 		"@types/node": "^20.14.9",
 		"@types/react": "^18.3.3",
-		"crypto-js": "^4.2.0",
-		"dayjs": "^1.11.11",
+		"classnames": "^2.5.1",
+		"formik": "^2.4.6",
 		"react": "^18.3.1",
+		"react-dropzone": "^14.2.3",
 		"react-toastify": "^10.0.5",
 		"ts-node": "^10.9.2",
 		"tsup": "^8.1.0",
-		"typescript": "^5.5.2",
-		"vitest": "^1.6.0",
-		"zod": "^3.23.8"
+		"typescript": "^5.5.3",
+		"vitest": "^1.6.0"
 	},
 	"contributors": [
 		{

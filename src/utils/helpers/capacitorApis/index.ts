@@ -7,7 +7,7 @@ import {
 	decryptData,
 	encryptData,
 	ztkMessages,
-} from '@zaions/tool-kit';
+} from 'zaions-tool-kit';
 
 export const showToast = async (
 	message: string = ztkMessages.general.success,

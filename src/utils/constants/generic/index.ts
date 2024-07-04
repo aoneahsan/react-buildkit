@@ -10,6 +10,7 @@ export const APP_ROUTES = {
 	register: '/register',
 	login: '/login',
 	myAccount: '/my-account',
+	resetPassword: '/forget-password'
 } as const;
 
 export const API_URLS = {
@@ -28,3 +29,7 @@ export const developerDetails = {
 	linkedinProfile: 'https://linkedin.com/in/aoneahsan',
 	githubProfile: 'https://github.com/aoneahsan',
 } as const;
+
+export const defaultValues = {
+	minCharacter: 6
+}

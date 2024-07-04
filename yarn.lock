@@ -16,7 +16,7 @@
 
 "@capacitor/dialog@^6.0.0":
   version "6.0.0"
-  resolved "https://registry.npmjs.org/@capacitor/dialog/-/dialog-6.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/@capacitor/dialog/-/dialog-6.0.0.tgz#749689a3800560002a0fda1be0004b538e709f66"
   integrity sha512-TnkfngkfB+t9m6wM/NDCyOjencSHHFBB1rqTDgrcAyoyP+Fjmykg6iRD5W7j9v52vNY2BESPmp692uWNbh88zA==
 
 "@capacitor/preferences@^6.0.1":
@@ -373,11 +373,6 @@
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
-
-"@types/validator@^13.12.0":
-  version "13.12.0"
-  resolved "https://registry.npmjs.org/@types/validator/-/validator-13.12.0.tgz"
-  integrity sha512-nH45Lk7oPIJ1RVOF6JgFI6Dy0QpHEzq4QecZhvguxYPDwT8c93prCMqAtiIttm39voZ+DDR+qkNnMpJmMBRqag==
 
 "@vitest/expect@1.6.0":
   version "1.6.0"
@@ -1575,11 +1570,6 @@ v8-compile-cache-lib@^3.0.1:
   version "3.0.1"
   resolved "https://registry.npmjs.org/v8-compile-cache-lib/-/v8-compile-cache-lib-3.0.1.tgz"
   integrity sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==
-
-validator@^13.12.0:
-  version "13.12.0"
-  resolved "https://registry.npmjs.org/validator/-/validator-13.12.0.tgz"
-  integrity sha512-c1Q0mCiPlgdTVVVIJIrBuxNicYE+t/7oKeI9MWLj3fh/uq2Pxh/3eeWbVZ4OcGW1TUf53At0njHw5SMdA3tmMg==
 
 vite-node@1.6.0:
   version "1.6.0"

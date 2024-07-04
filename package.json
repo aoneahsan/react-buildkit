@@ -12,7 +12,8 @@
 		"dev": "npm run update:linked-packages && tsup --watch",
 		"build": "npm run update:linked-packages && tsup",
 		"test": "npm run update:linked-packages && vitest",
-		"update:linked-packages": "yarn && yarn link zaions-tool-kit && tsup"
+		"update:linked-packages": "yarn && yarn link zaions-tool-kit && tsup",
+		"push:code": "git add . && git commit -m 'logic updated, taking code backup' && git push -u o main"
 	},
 	"repository": {
 		"type": "git",
@@ -58,16 +59,17 @@
 		"@capacitor/core": "^6.1.0",
 		"@capacitor/preferences": "^6.0.1",
 		"@capacitor/toast": "^6.0.1",
-		"react": "^18.3.1",
-		"react-toastify": "^10.0.5",
-		"formik": "^2.4.6",
-		"react-dropzone": "^14.2.3",
 		"classnames": "^2.5.1",
+		"formik": "^2.4.6",
+		"react": "^18.3.1",
+		"react-dropzone": "^14.2.3",
+		"react-toastify": "^10.0.5",
 		"zaions-tool-kit": "*"
 	},
 	"devDependencies": {
 		"@capacitor/browser": "^6.0.1",
 		"@capacitor/core": "^6.1.0",
+		"@capacitor/dialog": "^6.0.0",
 		"@capacitor/preferences": "^6.0.1",
 		"@capacitor/toast": "^6.0.1",
 		"@types/node": "^20.14.9",

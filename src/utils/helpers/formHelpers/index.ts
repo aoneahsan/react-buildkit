@@ -1,8 +1,12 @@
 import { defaultValues } from '@utils/constants';
 import formValidations from '@utils/messages/generic';
-import validator from 'validator';
 import { CONTAINS, zValidationRuleE } from '@enums/generic';
-import { convertToTitleCase } from 'zaions-tool-kit'
+import {
+	convertToTitleCase,
+	validateEmail,
+	validatePhoneNumber,
+	validateURL,
+} from 'zaions-tool-kit';
 
 export const formatFormErrorsFromApiResponse = (
 	errors: Record<string, string> | null
@@ -73,29 +77,28 @@ export const validateField = (
 		errorsObj[fieldKey] = `${_fieldKeyTitleCase} is required`;
 	} else if (
 		validationRule === zValidationRuleE.email &&
-		!validator.isEmail(_val)
+		!validateEmail(_val)
 	) {
 		errorsObj[fieldKey] = `${_fieldKeyTitleCase} needs to be a valid email.`;
 	} else if (validationRule === zValidationRuleE.password) {
 		if (!checkIfContains(_val, CONTAINS.minCharacter)) {
-			errorsObj[fieldKey] =
-				`${_fieldKeyTitleCase} needs to be at least ${defaultValues.minCharacter} digits long.`;
+			errorsObj[
+				fieldKey
+			] = `${_fieldKeyTitleCase} needs to be at least ${defaultValues.minCharacter} digits long.`;
 		} else if (!checkIfContains(_val, CONTAINS.number)) {
 			errorsObj[fieldKey] = `${_fieldKeyTitleCase} must include a digit.`;
 		} else if (!checkIfContains(_val, CONTAINS.letter)) {
 			errorsObj[fieldKey] = `${_fieldKeyTitleCase} must include a letter.`;
 		} else if (!checkIfContains(_val, CONTAINS.specialSymbol)) {
-			errorsObj[fieldKey] =
-				`${_fieldKeyTitleCase} must include a special character.`;
+			errorsObj[
+				fieldKey
+			] = `${_fieldKeyTitleCase} must include a special character.`;
 		}
-	} else if (
-		validationRule === zValidationRuleE.url &&
-		!validator.isURL(_val)
-	) {
+	} else if (validationRule === zValidationRuleE.url && !validateURL(_val)) {
 		errorsObj[fieldKey] = formValidations.urlIncorrectFormate;
 	} else if (
 		validationRule === zValidationRuleE.phoneNumber &&
-		!validator.isMobilePhone(_val)
+		!validatePhoneNumber(_val)
 	) {
 		errorsObj[fieldKey] = formValidations.phoneNumberRequired;
 	} else if (validationRule === zValidationRuleE.otp) {
@@ -103,7 +106,9 @@ export const validateField = (
 			!checkIfContains(_val, CONTAINS.minCharacter) ||
 			_val?.length > defaultValues.minCharacter
 		) {
-			errorsObj[fieldKey] = `${_fieldKeyTitleCase} needs to be ${defaultValues.minCharacter} digits`;
+			errorsObj[
+				fieldKey
+			] = `${_fieldKeyTitleCase} needs to be ${defaultValues.minCharacter} digits`;
 		}
 	}
 };
@@ -126,7 +131,7 @@ export const validateFields = (
 	if (fieldKeys.length !== validationRules.length) {
 		alert({
 			title: 'Invalid Request!',
-			message: 'Fields and Validation Rules array length not matching.'
+			message: 'Fields and Validation Rules array length not matching.',
 		});
 		return;
 	}

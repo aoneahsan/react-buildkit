@@ -1,7 +1,9 @@
 import backendApi from './backendApi'
-import formValidations from './generic'
+import generic from './generic'
+import formValidations from './formValidations'
 
 export const zrtkMessages = {
     formValidations,
+    generic,
     backendApi
 } as const

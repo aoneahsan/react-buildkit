@@ -1,5 +1,5 @@
 import { defaultValues } from '@utils/constants';
-import formValidations from '@utils/messages/generic';
+import formValidations from '@utils/messages/formValidations';
 import { CONTAINS, zValidationRuleE } from '@enums/generic';
 import {
 	convertToTitleCase,

@@ -49,7 +49,6 @@
   },
   "homepage": "https://github.com/zaions/react-tool-kit#readme",
   "engines": {
-    "node": ">=22.2.0",
     "npm": ">=10.7.0",
     "yarn": ">=1.22.22"
   },

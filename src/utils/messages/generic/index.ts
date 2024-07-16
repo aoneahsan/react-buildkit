@@ -1,7 +1,6 @@
 const generic = {
     registerSuccessfully: 'Register successfully :)',
-    loginSuccessfully: 'Login successfully :)',
-    userDeleted: 'User deleted successfully'
+    loginSuccessfully: 'Login successfully :)'
 } as const;
 
 export default generic;

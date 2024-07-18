@@ -137,7 +137,8 @@ export const ZFilterAndPaginateData = <T>({
 	const _paginationInfo: ZPaginationInfoI = {
 		currentPage: filters?.currentPage,
 		canGoNext: true,
-		canGoPrevious: true
+		canGoPrevious: true,
+		pages: 0
 	};
 	let _data = ZFilterData({
 		data,
@@ -145,14 +146,14 @@ export const ZFilterAndPaginateData = <T>({
 		searchKey
 	});
 
-	const _pages = ZTotalPages(_data?.length, filters?.itemPerPage);
+	_paginationInfo.pages = ZTotalPages(_data?.length, filters?.itemPerPage);
 
-	const { rangeWithDots } = ZPaginate(_paginationInfo?.currentPage, _pages);
+	const { rangeWithDots } = ZPaginate(_paginationInfo?.currentPage, _paginationInfo?.pages);
 
 	_paginationInfo.range = rangeWithDots;
 
 	if (filters?.itemPerPage > 0) {
-		if (_paginationInfo?.currentPage === _pages || !_data?.length) {
+		if (_paginationInfo?.currentPage === _paginationInfo?.pages || !_data?.length) {
 			_paginationInfo.canGoNext = false;
 		}
 		if (_paginationInfo?.currentPage < 2) {
@@ -161,8 +162,8 @@ export const ZFilterAndPaginateData = <T>({
 
 		if (filters?.itemPerPage >= _data?.length) {
 			_paginationInfo.currentPage = 1;
-		} else if (_paginationInfo.currentPage > _pages) {
-			_paginationInfo.currentPage = _pages;
+		} else if (_paginationInfo.currentPage > _paginationInfo?.pages) {
+			_paginationInfo.currentPage = _paginationInfo?.pages;
 		}
 		// pagination info
 		_paginationInfo.from =

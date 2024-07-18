@@ -13,4 +13,5 @@ export interface ZPaginationInfoI {
     currentPage: number;
     canGoPrevious: boolean;
     canGoNext: boolean;
+    pages?: number;
 }

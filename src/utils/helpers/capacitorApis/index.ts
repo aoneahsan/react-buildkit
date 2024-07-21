@@ -9,6 +9,7 @@ import {
 	encryptData,
 	ztkMessages,
 } from 'zaions-tool-kit';
+import { Clipboard } from '@capacitor/clipboard';
 
 export const showToast = async (
 	message: string = ztkMessages.general.success,
@@ -136,4 +137,16 @@ export const showZPrompt = async ({
 		message
 	});
 	return { value, cancelled };
+};
+
+export const zWriteToClipboard = async (value?: string) => {
+	await Clipboard.write({
+		string: value
+	});
+};
+
+export const zCheckClipboard = async () => {
+	const result = await Clipboard.read();
+
+	return result
 };

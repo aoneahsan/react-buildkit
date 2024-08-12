@@ -4,6 +4,7 @@ const user = {
     updatedSuccessfully: 'User updated successfully.',
     unBlockSuccessfully: 'User unblock successfully.',
     notFound: 'User not found.',
+    noIdProvided: 'No user id provided!'
 } as const;
 
 export default user;

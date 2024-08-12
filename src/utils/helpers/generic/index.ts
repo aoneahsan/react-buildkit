@@ -77,11 +77,13 @@ export const ZPaginate = (
 export const ZFilterData = <T>({
 	data,
 	filters,
-	searchKey
+	searchKey,
+	caseSensitive = true
 }: {
 	data: T;
-	filters: ZFilterOptions;
+	filters: Partial<ZFilterOptions>;
 	searchKey?: string | string[];
+	caseSensitive?: boolean
 }): Array<(T & unknown[])[number]> => {
 	let _data = null;
 	if (Array.isArray(data) && data?.length > 0) {
@@ -91,17 +93,28 @@ export const ZFilterData = <T>({
 			_data = _data?.filter((_item) => {
 				if (typeof searchKey === 'string') {
 					if (searchKey in _item) {
+						if (caseSensitive) {
+							return String(_item[searchKey])
+								?.trim()
+								?.toLocaleLowerCase()
+								?.includes(filters?.search ?? '');
+						}
 						return String(_item[searchKey])
 							?.trim()
-							?.toLocaleLowerCase()
 							?.includes(filters?.search ?? '');
+
 					}
 				} else if (Array.isArray(searchKey)) {
 					return searchKey?.some((_key) => {
 						if (_key in _item) {
+							if (caseSensitive) {
+								return String(_item[_key])
+									?.trim()
+									?.toLowerCase()
+									?.includes(filters?.search?.trim() ?? '');
+							}
 							return String(_item[_key])
 								?.trim()
-								?.toLowerCase()
 								?.includes(filters?.search?.trim() ?? '');
 						}
 						return false; // Key not found in item

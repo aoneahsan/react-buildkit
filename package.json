@@ -56,7 +56,6 @@
   },
   "packageManager": "yarn@1.22.22",
   "peerDependencies": {
-    "zaions-tool-kit": "*",
     "@capacitor/browser": "^6.0.2",
     "@capacitor/clipboard": "^6.0.1",
     "@capacitor/core": "^6.1.2",
@@ -68,7 +67,7 @@
     "react": "^18.3.1",
     "react-dropzone": "^14.2.3",
     "react-responsive": "^10.0.0",
-    "react-toastify": "^10.0.5"
+    "zaions-tool-kit": "*"
   },
   "devDependencies": {
     "@capacitor/browser": "^6.0.2",
@@ -77,19 +76,18 @@
     "@capacitor/dialog": "^6.0.1",
     "@capacitor/preferences": "^6.0.2",
     "@capacitor/toast": "^6.0.2",
-    "@types/node": "^22.1.0",
+    "@types/node": "^22.4.1",
     "@types/react": "^18.3.3",
     "classnames": "^2.5.1",
     "formik": "^2.4.6",
     "react": "^18.3.1",
     "react-dropzone": "^14.2.3",
     "react-responsive": "^10.0.0",
-    "react-toastify": "^10.0.5",
     "ts-node": "^10.9.2",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4",
     "vitest": "^2.0.5",
-    "zaions-tool-kit": "*"
+    "zaions-tool-kit": "0.0.10"
   },
   "contributors": [
     {

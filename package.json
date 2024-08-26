@@ -74,6 +74,7 @@
     "@capacitor/clipboard": "^6.0.1",
     "@capacitor/core": "^6.1.2",
     "@capacitor/dialog": "^6.0.1",
+    "@capacitor/geolocation": "^6.0.1",
     "@capacitor/preferences": "^6.0.2",
     "@capacitor/toast": "^6.0.2",
     "@types/node": "^22.4.1",

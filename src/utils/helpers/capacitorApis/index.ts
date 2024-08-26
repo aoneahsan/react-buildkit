@@ -3,6 +3,7 @@ import { Dialog } from '@capacitor/dialog';
 import { Toast } from '@capacitor/toast';
 import { Browser } from '@capacitor/browser';
 import { ToastDurationEnum, ToastPositionEnum } from '@enums/capacitorApis';
+import { Geolocation } from '@capacitor/geolocation';
 import {
 	LinkTargetEnum,
 	decryptData,
@@ -149,4 +150,13 @@ export const zCheckClipboard = async () => {
 	const result = await Clipboard.read();
 
 	return result
+};
+
+export const zGetCurrentPosition = async () => {
+	return await Geolocation.getCurrentPosition();
+};
+
+
+export const zCheckPermissions = async () => {
+	return await Geolocation.checkPermissions();
 };

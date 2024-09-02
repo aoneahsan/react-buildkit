@@ -7,7 +7,6 @@ import { mediaScales } from '@utils/constants/hooks';
  * @returns an object with boolean values for each defined media scale.
  */
 export const useZMediaQueryScale = (): useZMediaQueryScaleReturnInterface => {
-    // Check if the screen width is at 2 extra-large (sxl) scale
     const is2XlScale = useMediaQuery({
         query: `(min-width: ${mediaScales.brackpoint_2xl})`
     });
@@ -16,74 +15,97 @@ export const useZMediaQueryScale = (): useZMediaQueryScaleReturnInterface => {
         query: `(max-width: ${mediaScales.brackpoint_2xl})`
     });
 
-    // Check if the screen width is at extra-large (xl) scale
     const isXlScale = useMediaQuery({
         query: `(min-width: ${mediaScales.brackpoint_xl})`
     });
 
-    // Check if the screen width is at 1300px scale
+    const isBelowXlScale = useMediaQuery({
+        query: `(max-width: ${mediaScales.brackpoint_xl})`
+    });
+
     const is1300pxScale = useMediaQuery({
         query: '(min-width: 1300px)'
     });
 
-    // Check if the screen width is at 1250px scale
     const is1250pxScale = useMediaQuery({
         query: '(min-width: 1250px)'
     });
 
-    // Check if the screen width is at 1200px scale
     const is1200pxScale = useMediaQuery({
         query: '(min-width: 1200px)'
     });
 
-    // Check if the screen width is at 1150px scale
     const is1150pxScale = useMediaQuery({
         query: '(min-width: 1150px)'
     });
 
-    // Check if the screen width is at 1100px scale
     const is1100pxScale = useMediaQuery({
         query: '(min-width: 1100px)'
     });
 
-    // Check if the screen width is at 900px scale
     const is900pxScale = useMediaQuery({
         query: '(min-width: 900px)'
     });
 
-    // Check if the screen width is at 900px scale
     const isBelow900pxScale = useMediaQuery({
         query: '(max-width: 900px)'
     });
 
-    // Check if the screen width is at large (lg) scale
     const isLgScale = useMediaQuery({
         query: `(min-width: ${mediaScales.brackpoint_lg})`
     });
 
-    // Check if the screen width is at medium (md) scale
+    const isBelowLgScale = useMediaQuery({
+        query: `(max-width: ${mediaScales.brackpoint_lg})`
+    });
+
     const isMdScale = useMediaQuery({
         query: `(min-width: ${mediaScales.brackpoint_md})`
     });
 
-    // Check if the screen width is at small (sm) scale
+    const is768Scale = useMediaQuery({
+        query: '(min-width: 768px)'
+    });
+
+    const isBelow768Scale = useMediaQuery({
+        query: '(max-width: 767px)'
+    });
+
+    const isBelowMdScale = useMediaQuery({
+        query: `(max-width: ${mediaScales.brackpoint_md})`
+    });
+
     const isSmScale = useMediaQuery({
         query: `(min-width: ${mediaScales.brackpoint_sm})`
     });
 
-    // Check if the screen width is at extra small (xs) scale
+    const isBelowSmScale = useMediaQuery({
+        query: `(max-width: ${mediaScales.brackpoint_sm})`
+    });
+
     const isXsScale = useMediaQuery({
         query: `(min-width: ${mediaScales.brackpoint_xs})`
+    });
+
+    const isBelowXsScale = useMediaQuery({
+        query: `(max-width: ${mediaScales.brackpoint_xs})`
     });
 
     return {
         is2XlScale,
         isBelow2XlScale,
         isXlScale,
+        isBelowXlScale,
         isLgScale,
+        isBelowLgScale,
         isMdScale,
+        isBelowMdScale,
+        is768Scale,
+        isBelow768Scale,
         isSmScale,
+        isBelowSmScale,
         isXsScale,
+        isBelowXsScale,
         is1300pxScale,
         is1200pxScale,
         is1250pxScale,

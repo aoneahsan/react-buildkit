@@ -77,7 +77,7 @@
     "@capacitor/geolocation": "^6.0.1",
     "@capacitor/preferences": "^6.0.2",
     "@capacitor/toast": "^6.0.2",
-    "@types/node": "^22.5.2",
+    "@types/node": "^22.5.4",
     "@types/react": "^18.3.5",
     "classnames": "^2.5.1",
     "formik": "^2.4.6",
@@ -86,9 +86,9 @@
     "react-responsive": "^10.0.0",
     "ts-node": "^10.9.2",
     "tsup": "^8.2.4",
-    "typescript": "^5.5.4",
+    "typescript": "^5.6.2",
     "vitest": "^2.0.5",
-    "zaions-tool-kit": "*"
+    "zaions-tool-kit": "^0.0.34"
   },
   "contributors": [
     {
@@ -104,5 +104,6 @@
     "url": "https://www.patreon.com/zaions"
   },
   "private": false,
-  "pricing": "Free"
+  "pricing": "Free",
+  "dependencies": {}
 }

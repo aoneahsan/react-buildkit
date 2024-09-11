@@ -51,4 +51,8 @@ export enum TableIdsEnum {
     // Withdraw request
     requestedAt = 'tableRequestedAtCol',
     playerEmail = 'tablePlayerEmailCol',
+
+    //
+    roleIdentifier = 'roleIdentifier',
+    isDefault = 'isDefault',
 }

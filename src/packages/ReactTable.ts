@@ -1,3 +1,5 @@
+import { checkForDuplicateEnumValues } from 'zaions-tool-kit';
+
 export enum TableIdsEnum {
   // Generic
   id = 'tableIdCol',
@@ -58,3 +60,8 @@ export enum TableIdsEnum {
   roleIdentifier = 'roleIdentifier',
   isDefault = 'isDefault',
 }
+
+checkForDuplicateEnumValues(
+  TableIdsEnum,
+  'Duplicate values found in "TableIdsEnum".'
+);

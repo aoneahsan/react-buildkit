@@ -1,5 +1,5 @@
 const backendApi = {
-    invalidUserData: 'invalid user data'
-} as const
+  invalidUserData: 'invalid user data',
+} as const;
 
-export default backendApi
+export default backendApi;

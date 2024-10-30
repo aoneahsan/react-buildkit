@@ -1,46 +1,36 @@
+import { IStar, ZReactStarsProps } from '@src/types/packages';
 import React, {
-  useState,
-  useEffect,
   CSSProperties,
+  MouseEvent,
   ReactElement,
-  MouseEvent
+  useEffect,
+  useState,
 } from 'react';
+import { JSX } from 'react/jsx-runtime';
 
-interface ZReactStarsProps {
-  className?: string;
-  edit?: boolean;
-  value?: number;
-  count?: number;
-  size?: number;
-  color1?: string;
-  color2?: string;
-  hoverColor?: string;
-  onChange?: (value: number) => void;
-  disabled?: boolean; // Added disabled prop
-}
-
-interface Star {
-  active: boolean;
-  hover: boolean;
-}
-
-const parentStyles: CSSProperties = {
+export const parentStyles: CSSProperties = {
   overflow: 'hidden',
-  position: 'relative'
+  position: 'relative',
 };
 
-const defaultStyles: CSSProperties = {
+export const defaultStyles: CSSProperties = {
   cursor: 'pointer',
   display: 'inline-block',
-  transition: 'color 0.3s'
+  transition: 'color 0.3s',
 };
 
-const disabledStyles: CSSProperties = {
+export const disabledStyles: CSSProperties = {
   cursor: 'not-allowed',
-  opacity: 0.5
+  opacity: 0.5,
 };
 
-const StarIcon = ({ fill, size }: { fill: string; size: number }) => (
+export const StarIcon = ({
+  fill,
+  size,
+}: {
+  fill: string;
+  size: number;
+}): JSX.Element => (
   <svg
     width={size}
     height={size}
@@ -52,7 +42,7 @@ const StarIcon = ({ fill, size }: { fill: string; size: number }) => (
   </svg>
 );
 
-const ZReactStars: React.FC<ZReactStarsProps> = (props) => {
+export const ZReactStars: React.FC<ZReactStarsProps> = (props) => {
   const {
     className,
     edit = true,
@@ -63,17 +53,17 @@ const ZReactStars: React.FC<ZReactStarsProps> = (props) => {
     color2 = '#ffd700',
     hoverColor = '#e6b800',
     onChange = () => {},
-    disabled = false // Default disabled to false
+    disabled = false, // Default disabled to false
   } = props;
 
-  const [stars, setStars] = useState<Star[]>([]);
+  const [stars, setStars] = useState<IStar[]>([]);
 
   useEffect(() => {
     setStars(getStars(value));
   }, [value, count]);
 
-  const getStars = (activeCount: number = Math.round(value)): Star[] => {
-    const starsArray: Star[] = [];
+  const getStars = (activeCount: number = Math.round(value)): IStar[] => {
+    const starsArray: IStar[] = [];
     for (let i = 0; i < count; i++) {
       starsArray.push({ active: i < activeCount, hover: false });
     }
@@ -86,7 +76,7 @@ const ZReactStars: React.FC<ZReactStarsProps> = (props) => {
     const index = Number(event.currentTarget.getAttribute('data-index')) + 1;
     const newStars = getStars(index).map((star, i) => ({
       ...star,
-      hover: i < index
+      hover: i < index,
     }));
     setStars(newStars);
   };
@@ -111,7 +101,7 @@ const ZReactStars: React.FC<ZReactStarsProps> = (props) => {
           ...defaultStyles,
           ...(disabled ? disabledStyles : {}),
           color: star.active ? color2 : color1,
-          fill: star.hover ? hoverColor : star.active ? color2 : color1
+          fill: star.hover ? hoverColor : star.active ? color2 : color1,
         }}
         key={i}
         data-index={i}
@@ -129,10 +119,11 @@ const ZReactStars: React.FC<ZReactStarsProps> = (props) => {
   };
 
   return (
-    <div className={className} style={parentStyles}>
+    <div
+      className={className}
+      style={parentStyles}
+    >
       {renderStars()}
     </div>
   );
 };
-
-export default ZReactStars;

@@ -1,28 +1,28 @@
-import { defaultValues } from '@utils/constants';
-import formValidations from '@utils/messages/formValidations';
 import { CONTAINS, zValidationRuleE } from '@enums/generic';
+import { defaultValues } from '@utils/constants/generic';
+import formValidations from '@utils/messages/formValidations';
 import {
-	convertToTitleCase,
-	validateEmail,
-	validatePhoneNumber,
-	validateURL,
+  convertToTitleCase,
+  validateEmail,
+  validatePhoneNumber,
+  validateURL,
 } from 'zaions-tool-kit';
 
 export const formatFormErrorsFromApiResponse = (
-	errors: Record<string, string> | null
-) => {
-	const _errors: Record<string, string> = {};
-	if (errors !== null) {
-		Object.keys(errors).forEach((_key) => {
-			const message = (errors ?? {})[_key];
-			if (message) {
-				_errors[_key] = message;
-			}
-		});
-		return _errors;
-	} else {
-		return null;
-	}
+  errors: Record<string, string> | null
+): Record<string, string> | null => {
+  const _errors: Record<string, string> = {};
+  if (errors !== null) {
+    Object.keys(errors).forEach((_key) => {
+      const message = (errors ?? {})[_key];
+      if (message) {
+        _errors[_key] = message;
+      }
+    });
+    return _errors;
+  } else {
+    return null;
+  }
 };
 
 /**
@@ -33,22 +33,22 @@ export const formatFormErrorsFromApiResponse = (
  * @returns A boolean indicating whether the string contains the specified characters.
  */
 export const checkIfContains = (
-	val: string,
-	contains: CONTAINS = CONTAINS.number
+  val: string,
+  contains: CONTAINS = CONTAINS.number
 ): boolean => {
-	switch (contains) {
-		case CONTAINS.number:
-			return /\d/.test(val);
-		case CONTAINS.letter:
-			return /[a-zA-Z]+/.test(val);
-		case CONTAINS.specialSymbol:
-			return /[\W_]+/.test(val);
-		case CONTAINS.minCharacter:
-			return val.length >= defaultValues.minCharacter;
+  switch (contains) {
+    case CONTAINS.number:
+      return /\d/.test(val);
+    case CONTAINS.letter:
+      return /[a-zA-Z]+/.test(val);
+    case CONTAINS.specialSymbol:
+      return /[\W_]+/.test(val);
+    case CONTAINS.minCharacter:
+      return val.length >= defaultValues.minCharacter;
 
-		default:
-			return /\d/.test(val);
-	}
+    default:
+      return /\d/.test(val);
+  }
 };
 
 /**
@@ -60,57 +60,57 @@ export const checkIfContains = (
  * @param validationRule - The validation rule to be applied.
  */
 export const validateField = (
-	fieldKey: string,
-	values: Record<string, unknown>,
-	errorsObj: Record<string, unknown>,
-	validationRule: zValidationRuleE = zValidationRuleE.string
+  fieldKey: string,
+  values: Record<string, unknown>,
+  errorsObj: Record<string, unknown>,
+  validationRule: zValidationRuleE = zValidationRuleE.string
 ): void => {
-	const _fieldKeyTitleCase = convertToTitleCase(fieldKey);
-	const _val = String(values[fieldKey])?.trim();
-	/**
-	 * Checking in the field key is empty then give `fieldKey is required` error message (generally for every field)
-	 */
-	if (
-		!Object.prototype.hasOwnProperty.call(values, fieldKey) ||
-		_val.length === 0
-	) {
-		errorsObj[fieldKey] = `${_fieldKeyTitleCase} is required`;
-	} else if (
-		validationRule === zValidationRuleE.email &&
-		!validateEmail(_val)
-	) {
-		errorsObj[fieldKey] = `${_fieldKeyTitleCase} needs to be a valid email.`;
-	} else if (validationRule === zValidationRuleE.password) {
-		if (!checkIfContains(_val, CONTAINS.minCharacter)) {
-			errorsObj[
-				fieldKey
-			] = `${_fieldKeyTitleCase} needs to be at least ${defaultValues.minCharacter} digits long.`;
-		} else if (!checkIfContains(_val, CONTAINS.number)) {
-			errorsObj[fieldKey] = `${_fieldKeyTitleCase} must include a digit.`;
-		} else if (!checkIfContains(_val, CONTAINS.letter)) {
-			errorsObj[fieldKey] = `${_fieldKeyTitleCase} must include a letter.`;
-		} else if (!checkIfContains(_val, CONTAINS.specialSymbol)) {
-			errorsObj[
-				fieldKey
-			] = `${_fieldKeyTitleCase} must include a special character.`;
-		}
-	} else if (validationRule === zValidationRuleE.url && !validateURL(_val)) {
-		errorsObj[fieldKey] = formValidations.urlIncorrectFormate;
-	} else if (
-		validationRule === zValidationRuleE.phoneNumber &&
-		!validatePhoneNumber(_val)
-	) {
-		errorsObj[fieldKey] = formValidations.phoneNumberRequired;
-	} else if (validationRule === zValidationRuleE.otp) {
-		if (
-			!checkIfContains(_val, CONTAINS.minCharacter) ||
-			_val?.length > defaultValues.minCharacter
-		) {
-			errorsObj[
-				fieldKey
-			] = `${_fieldKeyTitleCase} needs to be ${defaultValues.minCharacter} digits`;
-		}
-	}
+  const _fieldKeyTitleCase = convertToTitleCase(fieldKey);
+  const _val = String(values[fieldKey])?.trim();
+  /**
+   * Checking in the field key is empty then give `fieldKey is required` error message (generally for every field)
+   */
+  if (
+    !Object.prototype.hasOwnProperty.call(values, fieldKey) ||
+    _val.length === 0
+  ) {
+    errorsObj[fieldKey] = `${_fieldKeyTitleCase} is required`;
+  } else if (
+    validationRule === zValidationRuleE.email &&
+    !validateEmail(_val)
+  ) {
+    errorsObj[fieldKey] = `${_fieldKeyTitleCase} needs to be a valid email.`;
+  } else if (validationRule === zValidationRuleE.password) {
+    if (!checkIfContains(_val, CONTAINS.minCharacter)) {
+      errorsObj[
+        fieldKey
+      ] = `${_fieldKeyTitleCase} needs to be at least ${defaultValues.minCharacter} digits long.`;
+    } else if (!checkIfContains(_val, CONTAINS.number)) {
+      errorsObj[fieldKey] = `${_fieldKeyTitleCase} must include a digit.`;
+    } else if (!checkIfContains(_val, CONTAINS.letter)) {
+      errorsObj[fieldKey] = `${_fieldKeyTitleCase} must include a letter.`;
+    } else if (!checkIfContains(_val, CONTAINS.specialSymbol)) {
+      errorsObj[
+        fieldKey
+      ] = `${_fieldKeyTitleCase} must include a special character.`;
+    }
+  } else if (validationRule === zValidationRuleE.url && !validateURL(_val)) {
+    errorsObj[fieldKey] = formValidations.urlIncorrectFormate;
+  } else if (
+    validationRule === zValidationRuleE.phoneNumber &&
+    !validatePhoneNumber(_val)
+  ) {
+    errorsObj[fieldKey] = formValidations.phoneNumberRequired;
+  } else if (validationRule === zValidationRuleE.otp) {
+    if (
+      !checkIfContains(_val, CONTAINS.minCharacter) ||
+      _val?.length > defaultValues.minCharacter
+    ) {
+      errorsObj[
+        fieldKey
+      ] = `${_fieldKeyTitleCase} needs to be ${defaultValues.minCharacter} digits`;
+    }
+  }
 };
 
 /**
@@ -123,21 +123,21 @@ export const validateField = (
  * for single filed validation use validateField function
  */
 export const validateFields = (
-	fieldKeys: string[],
-	values: Record<string, unknown>,
-	errorsObj: Record<string, unknown>,
-	validationRules: zValidationRuleE[]
+  fieldKeys: string[],
+  values: Record<string, unknown>,
+  errorsObj: Record<string, unknown>,
+  validationRules: zValidationRuleE[]
 ): void => {
-	if (fieldKeys.length !== validationRules.length) {
-		alert({
-			title: 'Invalid Request!',
-			message: 'Fields and Validation Rules array length not matching.',
-		});
-		return;
-	}
-	for (let i = 0; i < fieldKeys.length; i++) {
-		const _field = fieldKeys[i];
-		const _rule = validationRules[i];
-		validateField(_field, values, errorsObj, _rule);
-	}
+  if (fieldKeys.length !== validationRules.length) {
+    alert({
+      title: 'Invalid Request!',
+      message: 'Fields and Validation Rules array length not matching.',
+    });
+    return;
+  }
+  for (let i = 0; i < fieldKeys.length; i++) {
+    const _field = fieldKeys[i];
+    const _rule = validationRules[i];
+    validateField(_field, values, errorsObj, _rule);
+  }
 };

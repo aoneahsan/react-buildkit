@@ -1,7 +1,7 @@
-import { Capacitor } from "@capacitor/core";
+import { Capacitor } from '@capacitor/core';
 
-export const isCapAndroid = Capacitor.getPlatform() === "android";
-export const isCapIOS = Capacitor.getPlatform() === "ios";
-export const isCapWeb = Capacitor.getPlatform() === "web";
-export const isCapMobileApp = !isCapWeb;
-export const isHybrid = isCapIOS || isCapAndroid;
+export const isCapAndroid: boolean = Capacitor.getPlatform() === 'android';
+export const isCapIOS: boolean = Capacitor.getPlatform() === 'ios';
+export const isCapWeb: boolean = Capacitor.getPlatform() === 'web';
+export const isCapMobileApp: boolean = !isCapWeb;
+export const isHybrid: boolean = isCapIOS || isCapAndroid;

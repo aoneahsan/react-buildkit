@@ -1,74 +1,77 @@
-import { Preferences } from '@capacitor/preferences';
-import { Dialog } from '@capacitor/dialog';
-import { Toast } from '@capacitor/toast';
 import { Browser } from '@capacitor/browser';
-import { ToastDurationEnum, ToastPositionEnum } from '@enums/capacitorApis';
-import { Geolocation } from '@capacitor/geolocation';
-import {
-	LinkTargetEnum,
-	decryptData,
-	encryptData,
-	ztkMessages,
-} from 'zaions-tool-kit';
 import { Clipboard } from '@capacitor/clipboard';
+import { Dialog } from '@capacitor/dialog';
+import { Geolocation } from '@capacitor/geolocation';
+import { Preferences } from '@capacitor/preferences';
+import { Toast } from '@capacitor/toast';
+import { ToastDurationEnum, ToastPositionEnum } from '@enums/capacitorApis';
+import {
+  LinkTargetEnum,
+  decryptData,
+  encryptData,
+  ztkMessages,
+} from 'zaions-tool-kit';
 
 export const showToast = async (
-	message: string = ztkMessages.general.success,
-	duration: ToastDurationEnum = ToastDurationEnum.long,
-	position: ToastPositionEnum = ToastPositionEnum.bottom
-) => {
-	await Toast.show({
-		text: message,
-		position,
-		duration,
-	});
+  message: string = ztkMessages.general.success,
+  duration: ToastDurationEnum = ToastDurationEnum.long,
+  position: ToastPositionEnum = ToastPositionEnum.bottom
+): Promise<void> => {
+  await Toast.show({
+    text: message,
+    position,
+    duration,
+  });
 };
 
 export const BROWSER = {
-	open: async (url: string, target: LinkTargetEnum = LinkTargetEnum.blank) => {
-		try {
-			await Browser.open({
-				url,
-				windowName: target,
-			});
-		} catch (error) {
-			window.open(url, target);
-		}
-	},
+  open: async (
+    url: string,
+    target: LinkTargetEnum = LinkTargetEnum.blank
+  ): Promise<void> => {
+    try {
+      await Browser.open({
+        url,
+        windowName: target,
+      });
+    } catch (error) {
+      window.open(url, target);
+    }
+  },
 };
 
 /**
  * Utility object for handling secure storage operations.
  */
 export const STORAGE = {
-	get: async <T>(key: string): Promise<T | null> => {
-		try {
-			const _val = (await Preferences.get({ key })).value;
+  get: async <T>(key: string): Promise<T | null> => {
+    try {
+      const _val = (await Preferences.get({ key })).value;
 
-			if (_val) {
-				return decryptData<T>(_val);
-			}
-			return null;
-		} catch (error) {
-			return null;
-		}
-	},
-	set: async (key: string, data: unknown): Promise<void> => {
-		const _val = encryptData(data);
-		if (_val) {
-			await Preferences.set({ key, value: _val });
-		} else {
-			throw new Error(
-				'Something Went wrong while trying to set data in localstorage.'
-			);
-		}
-	},
-	remove: async (key: string): Promise<void> => {
-		await Preferences.remove({ key });
-	},
-	clear: async (): Promise<void> => {
-		await Preferences.clear();
-	},
+      if (_val) {
+        return decryptData<T>(_val);
+      }
+      return null;
+    } catch (error) {
+      return null;
+    }
+  },
+  set: async (key: string, data: unknown): Promise<void> => {
+    const _val = encryptData(data);
+    if (_val) {
+      await Preferences.set({ key, value: _val });
+    } else {
+      throw new Error(
+        'Something Went wrong while trying to set data in localstorage.'
+      );
+    }
+  },
+  remove: async (key: string): Promise<void> => {
+    await Preferences.remove({ key });
+  },
+  clear: async (): Promise<void> => {
+    await Preferences.clear();
+  },
 };
 
 /**
@@ -79,16 +82,16 @@ export const STORAGE = {
  * @returns A Promise that resolves when the alert is dismissed.
  */
 export const showZAlert = async ({
-	title = '',
-	message = ''
+  title = '',
+  message = '',
 }: {
-	title?: string;
-	message?: string;
+  title?: string;
+  message?: string;
 }): Promise<void> => {
-	await Dialog.alert({
-		title,
-		message
-	});
+  await Dialog.alert({
+    title,
+    message,
+  });
 };
 
 /**
@@ -100,19 +103,19 @@ export const showZAlert = async ({
  * `{ value: true }` if confirmed, `{ value: false }` if canceled.
  */
 export const showZConfirm = async ({
-	title = '',
-	message = ''
+  title = '',
+  message = '',
 }: {
-	title?: string;
-	message?: string;
+  title?: string;
+  message?: string;
 }): Promise<{
-	value: boolean;
+  value: boolean;
 }> => {
-	const { value } = await Dialog.confirm({
-		title,
-		message
-	});
-	return { value };
+  const { value } = await Dialog.confirm({
+    title,
+    message,
+  });
+  return { value };
 };
 
 /**
@@ -124,39 +127,44 @@ export const showZConfirm = async ({
  * `{ value: enteredValue, cancelled: false }` if a value is entered, `{ value: '', cancelled: true }` if canceled.
  */
 export const showZPrompt = async ({
-	title = '',
-	message = ''
+  title = '',
+  message = '',
 }: {
-	title?: string;
-	message?: string;
+  title?: string;
+  message?: string;
 }): Promise<{
-	value: string;
-	cancelled: boolean;
+  value: string;
+  cancelled: boolean;
 }> => {
-	const { value, cancelled } = await Dialog.prompt({
-		title,
-		message
-	});
-	return { value, cancelled };
+  const { value, cancelled } = await Dialog.prompt({
+    title,
+    message,
+  });
+  return { value, cancelled };
 };
 
-export const zWriteToClipboard = async (value?: string) => {
-	await Clipboard.write({
-		string: value
-	});
+export const zWriteToClipboard = async (value?: string): Promise<void> => {
+  await Clipboard.write({
+    string: value,
+  });
 };
 
-export const zCheckClipboard = async () => {
-	const result = await Clipboard.read();
+export const zCheckClipboard = async (): Promise<
+  import('@capacitor/clipboard').ReadResult
+> => {
+  const result = await Clipboard.read();
 
-	return result
+  return result;
 };
 
-export const zGetCurrentPosition = async () => {
-	return await Geolocation.getCurrentPosition();
+export const zGetCurrentPosition = async (): Promise<
+  import('@capacitor/geolocation').Position
+> => {
+  return await Geolocation.getCurrentPosition();
 };
 
-
-export const zCheckPermissions = async () => {
-	return await Geolocation.checkPermissions();
+export const zCheckPermissions = async (): Promise<
+  import('@capacitor/geolocation').PermissionStatus
+> => {
+  return await Geolocation.checkPermissions();
 };

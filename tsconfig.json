@@ -1,33 +1,38 @@
 {
-	"compilerOptions": {
-		"target": "es2016",
-		"module": "commonjs",
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
 
-		"baseUrl": "./",
-		"paths": {
-			"@utils/*": ["./src/utils/*"],
-			"@enums/*": ["./src/enums/*"],
-			"@src/*": ["./src/*"]
-		},
+    "baseUrl": "./",
+    "paths": {
+      "@utils/*": ["./src/utils/*"],
+      "@enums/*": ["./src/enums/*"],
+      "@src/*": ["./src/*"]
+    },
 
-		"types": ["vitest/globals", "vitest/importMeta"],
+    "types": ["vitest/globals", "vitest/importMeta"],
 
-		"declaration": true,
-		"declarationMap": true,
-		"sourceMap": true,
-		"outDir": "./dist",
-		"removeComments": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "removeComments": true,
 
-		"esModuleInterop": true,
+    "esModuleInterop": true,
 
-		"forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": true,
 
-		"strict": true,
-		"jsx": "react-jsx",
+    "strict": true,
+    "jsx": "react-jsx",
+    "isolatedDeclarations": true,
+    "isolatedModules": true,
+    "alwaysStrict": true,
+    "diagnostics": true,
 
-		"skipLibCheck": true /* Skip type checking all .d.ts files. */
-	},
-	"compileOnSave": true,
-	"exclude": ["node_modules", ".history", "*ignore*", ".vscode", ".git"],
-	"include": ["./src", "./tests"]
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */
+  },
+  "compileOnSave": true,
+  "exclude": ["node_modules", ".history", "*ignore*", ".vscode", ".git"],
+  "include": ["./src", "./tests"]
 }

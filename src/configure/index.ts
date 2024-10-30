@@ -1,4 +1,3 @@
-
-export const configureZRTK = (options: {}) => {
-	const {} = options;
+export const configureZRTK = (options: {}): void => {
+  const {} = options;
 };

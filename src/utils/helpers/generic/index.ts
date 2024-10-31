@@ -123,7 +123,24 @@ export const ZFilterData = <T>({
         return false;
       });
     }
+
+    // Apply key-value filter, ignoring null, undefined, or empty string values
+    if (
+      filters?.keyValueFilter &&
+      Object.keys(filters?.keyValueFilter).length > 0
+    ) {
+      _data = _data.filter((_item) =>
+        Object.entries(filters?.keyValueFilter!).every(([key, value]) => {
+          // Skip keys with null, undefined, or empty string values
+          if (value === null || value === undefined || value === '') {
+            return true;
+          }
+          return key in _item && _item[key] === value;
+        })
+      );
+    }
   }
+
   return _data ?? [];
 };
 

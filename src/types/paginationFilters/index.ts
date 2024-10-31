@@ -3,6 +3,7 @@ export interface ZFilterOptions {
   showAll?: string;
   itemPerPage: number;
   currentPage: number;
+  keyValueFilter?: Record<string, any>;
 }
 
 export interface ZPaginationInfoI {

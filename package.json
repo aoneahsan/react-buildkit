@@ -55,6 +55,47 @@
     "yarn": ">=1.22.22"
   },
   "packageManager": "yarn@1.22.22",
+  "peerDependenciesMeta": {
+    "@capacitor/browser": {
+      "optional": true
+    },
+    "@capacitor/clipboard": {
+      "optional": true
+    },
+    "@capacitor/core": {
+      "optional": true
+    },
+    "@capacitor/dialog": {
+      "optional": true
+    },
+    "@capacitor/geolocation": {
+      "optional": true
+    },
+    "@capacitor/preferences": {
+      "optional": true
+    },
+    "@capacitor/toast": {
+      "optional": true
+    },
+    "classnames": {
+      "optional": true
+    },
+    "formik": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "react-dropzone": {
+      "optional": true
+    },
+    "react-responsive": {
+      "optional": true
+    },
+    "zaions-tool-kit": {
+      "optional": false
+    }
+  },
   "peerDependencies": {
     "@capacitor/browser": "^6.0.3",
     "@capacitor/clipboard": "^6.0.1",

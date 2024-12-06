@@ -1,5 +1,9 @@
 import { APP_ROUTES } from '@utils/constants/generic';
-import { SearchParamKeysEnum, decryptData, encryptData } from 'zaions-tool-kit';
+import { SearchParamKeysEnum } from 'zaions-tool-kit';
+import {
+  decryptData,
+  encryptData,
+} from 'zaions-tool-kit/dist/require-package/crypto-js';
 
 export const setSearchParamsData = (
   data: unknown,

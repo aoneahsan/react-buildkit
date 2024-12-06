@@ -1,6 +1,6 @@
 {
   "name": "zaions-react-tool-kit",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "Zaions React Tool Kit, this is react projects tool kit created by Zaions Dev Team (https://zaions.com). We hope you will love this and all other packages we have developed for you, please do react out if you face any issue in packages we deliver. Once again have fun while working with these packages and let us know your feedback, it keeps us motivated. Have a great day :)",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -11,6 +11,7 @@
   "scripts": {
     "dev": "npm run unlink-packages && tsup --watch",
     "build": "npm run unlink-packages && tsup",
+    "serve": "npm run update:linked-packages && tsup",
     "test": "npm run unlink-packages && vitest",
     "update:linked-packages": "yarn install --force && yarn link zaions-tool-kit",
     "unlink-packages": "yarn unlink zaions-tool-kit && yarn install --force",
@@ -94,22 +95,34 @@
     },
     "zaions-tool-kit": {
       "optional": false
+    },
+    "crypto-js": {
+      "optional": true
+    },
+    "dayjs": {
+      "optional": true
+    },
+    "zod": {
+      "optional": true
     }
   },
   "peerDependencies": {
-    "@capacitor/browser": "^6.0.3",
-    "@capacitor/clipboard": "^6.0.1",
-    "@capacitor/core": "^6.1.2",
-    "@capacitor/dialog": "^6.0.1",
-    "@capacitor/geolocation": "^6.0.1",
-    "@capacitor/preferences": "^6.0.2",
-    "@capacitor/toast": "^6.0.2",
+    "@capacitor/browser": "^6.0.4",
+    "@capacitor/clipboard": "^6.0.2",
+    "@capacitor/core": "^6.2.0",
+    "@capacitor/dialog": "^6.0.2",
+    "@capacitor/geolocation": "^6.0.2",
+    "@capacitor/preferences": "^6.0.3",
+    "@capacitor/toast": "^6.0.3",
     "classnames": "^2.5.1",
     "formik": "^2.4.6",
-    "react": "^18.3.1",
+    "react": "^18.3.1 | ^19.0.0",
     "react-dropzone": "^14.3.5",
     "react-responsive": "^10.0.0",
-    "zaions-tool-kit": "^0.0.86"
+    "crypto-js": "^4.2.0",
+    "dayjs": "^1.11.13",
+    "zod": "^3.23.8",
+    "zaions-tool-kit": "^0.0.89"
   },
   "devDependencies": {
     "@capacitor/browser": "^6.0.4",
@@ -122,6 +135,8 @@
     "@types/node": "^22.10.1",
     "@types/react": "^19.0.0",
     "classnames": "^2.5.1",
+    "crypto-js": "^4.2.0",
+    "dayjs": "^1.11.13",
     "formik": "^2.4.6",
     "react": "^19.0.0",
     "react-dropzone": "^14.3.5",
@@ -130,7 +145,8 @@
     "tsup": "^8.3.5",
     "typescript": "^5.7.2",
     "vitest": "^2.1.8",
-    "zaions-tool-kit": "^0.0.88"
+    "zaions-tool-kit": "^0.0.89",
+    "zod": "^3.23.8"
   },
   "contributors": [
     {

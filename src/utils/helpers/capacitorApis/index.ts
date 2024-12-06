@@ -5,12 +5,11 @@ import { Geolocation } from '@capacitor/geolocation';
 import { Preferences } from '@capacitor/preferences';
 import { Toast } from '@capacitor/toast';
 import { ToastDurationEnum, ToastPositionEnum } from '@enums/capacitorApis';
+import { LinkTargetEnum, ztkMessages } from 'zaions-tool-kit';
 import {
-  LinkTargetEnum,
   decryptData,
   encryptData,
-  ztkMessages,
-} from 'zaions-tool-kit';
+} from 'zaions-tool-kit/dist/require-package/crypto-js';
 
 export const showToast = async (
   message: string = ztkMessages.general.success,

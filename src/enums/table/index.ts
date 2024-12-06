@@ -59,6 +59,8 @@ export enum TableIdsEnum {
   //
   roleIdentifier = 'roleIdentifier',
   isDefault = 'isDefault',
+
+  gameType = 'tableGameTypeCol',
 }
 
 checkForDuplicateEnumValues(

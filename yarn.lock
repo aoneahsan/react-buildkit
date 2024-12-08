@@ -24,10 +24,10 @@
   resolved "https://registry.yarnpkg.com/@capacitor/dialog/-/dialog-6.0.2.tgz#e0c032da979036f3fa01264e006edf341444b9f4"
   integrity sha512-yHWCJjEJeZJwltAuWdoPeUE11KFxfkmE/ybZXQu9AuQYYO0tO12fQyz3b3kQtupnL5wlH3Dff3M8RsQiLyTzQg==
 
-"@capacitor/geolocation@^6.0.2":
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/@capacitor/geolocation/-/geolocation-6.0.2.tgz#4a973029c2b2b69b14ce6d0177d144d458964d6c"
-  integrity sha512-Fxz2kx0aQW5YE1opUrEZZ9lLWK9tzfKV+ciA3jJ3HfsMbRwQ2AKzSbxlVCJg6OcSLlge4gJzpAFz3b86A3+/3Q==
+"@capacitor/geolocation@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@capacitor/geolocation/-/geolocation-6.1.0.tgz#cce926a19730a4bccdf2cecb49da1adabc876a00"
+  integrity sha512-jEY5DcZirxX1gOBuOvf/FL7FlPMOKcsnF8PlfYxu7OFwRDD7HRwehEPWtJXR6wSYLgsCujm7yRqKrjtyN+f14g==
 
 "@capacitor/preferences@^6.0.3":
   version "6.0.3"
@@ -561,11 +561,12 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
-"@types/react@^19.0.1":
-  version "19.0.1"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-19.0.1.tgz#a000d5b78f473732a08cecbead0f3751e550b3df"
-  integrity sha512-YW6614BDhqbpR5KtUYzTA+zlA7nayzJRA9ljz9CQoxthR0sDisYZLuvSMsil36t4EH/uAt8T52Xb4sVw17G+SQ==
+"@types/react@^18.3.14":
+  version "18.3.14"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.3.14.tgz#7ce43bbca0e15e1c4f67ad33ea3f83d75aa6756b"
+  integrity sha512-NzahNKvjNhVjuPBQ+2G7WlxstQ+47kXZNHlUvFakDViuIEfGY926GqhMueQFZ7woG+sPiQKlF36XfrIUVSUfFg==
   dependencies:
+    "@types/prop-types" "*"
     csstype "^3.0.2"
 
 "@vitest/expect@2.1.8":
@@ -1024,7 +1025,7 @@ lodash@^4.17.21:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
-loose-envify@^1.4.0:
+loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -1203,10 +1204,12 @@ react-responsive@^10.0.0:
     prop-types "^15.6.1"
     shallow-equal "^3.1.0"
 
-react@^19.0.0:
-  version "19.0.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-19.0.0.tgz#6e1969251b9f108870aa4bff37a0ce9ddfaaabdd"
-  integrity sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==
+react@^18.3.1:
+  version "18.3.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-18.3.1.tgz#49ab892009c53933625bd16b2533fc754cab2891"
+  integrity sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==
+  dependencies:
+    loose-envify "^1.1.0"
 
 readdirp@^4.0.1:
   version "4.0.2"
@@ -1615,10 +1618,10 @@ yn@3.1.1:
   resolved "https://registry.yarnpkg.com/yn/-/yn-3.1.1.tgz#1e87401a09d767c1d5eab26a6e4c185182d2eb50"
   integrity sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
 
-zaions-tool-kit@^0.0.89:
-  version "0.0.89"
-  resolved "https://registry.yarnpkg.com/zaions-tool-kit/-/zaions-tool-kit-0.0.89.tgz#90ea67060bb4aa09c3e4c2f72a7f6335688a5873"
-  integrity sha512-w7tU9EyBiDIWXuuTOa9wTgCRNuQeXBFeDH1OaiaRp5D5WVHCQuhAZfuRVXHX91HJC+6dlJmcblxqn4xPuzM8iQ==
+zaions-tool-kit@^0.0.91:
+  version "0.0.91"
+  resolved "https://registry.yarnpkg.com/zaions-tool-kit/-/zaions-tool-kit-0.0.91.tgz#3bfba715b559d0fce6ce1229b9cb8aff486a77bb"
+  integrity sha512-qqA4Ae03XlUDzNRzDCWtV54bG6fXUOIxrSpG6lFwgSeQHZscIGtbgDcA7LqqfJkb3vgL2D+poiEqQK0scjw7Ew==
 
 zod@^3.23.8:
   version "3.23.8"

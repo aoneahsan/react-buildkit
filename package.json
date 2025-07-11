@@ -1,6 +1,6 @@
 {
   "name": "react-buildkit",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "React BuildKit - A comprehensive TypeScript utility library for React applications with Capacitor integration for cross-platform mobile development. Provides helper functions, hooks, form validation, storage utilities, and more.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

@@ -82,7 +82,8 @@
       "Bash(yarn tsc:*)",
       "Bash(npm audit:*)",
       "Bash(yarn audit)",
-      "Bash(yarn outdated)"
+      "Bash(yarn outdated)",
+      "Bash(yarn test:*)"
     ],
     "deny": []
   }

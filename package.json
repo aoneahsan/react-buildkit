@@ -1,7 +1,7 @@
 {
-  "name": "zaions-react-tool-kit",
-  "version": "0.0.30",
-  "description": "Zaions React Tool Kit, this is react projects tool kit created by Zaions Dev Team (https://zaions.com). We hope you will love this and all other packages we have developed for you, please do react out if you face any issue in packages we deliver. Once again have fun while working with these packages and let us know your feedback, it keeps us motivated. Have a great day :)",
+  "name": "react-buildkit",
+  "version": "0.1.0",
+  "description": "React BuildKit - A comprehensive TypeScript utility library for React applications with Capacitor integration for cross-platform mobile development. Provides helper functions, hooks, form validation, storage utilities, and more.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -13,17 +13,18 @@
     "build": "npm run unlink-packages && tsup",
     "serve": "npm run update:linked-packages && tsup",
     "test": "npm run unlink-packages && vitest",
-    "update:linked-packages": "yarn install --force && yarn link zaions-tool-kit",
-    "unlink-packages": "yarn unlink zaions-tool-kit && yarn install --force",
+    "update:linked-packages": "yarn install --force",
+    "unlink-packages": "yarn install --force",
     "push:code": "git add . && git commit -m 'logic updated, taking code backup' && git push -u o main",
     "deploy": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/zaions/react-tool-kit.git"
+    "url": "git+ssh://git@github.com/aoneahsan/react-buildkit.git"
   },
   "keywords": [
-    "zaions",
+    "react",
+    "buildkit",
     "tools",
     "kit",
     "tool kit",
@@ -31,26 +32,28 @@
     "helpers",
     "constants",
     "functions",
-    "server",
-    "client",
-    "nodejs",
+    "capacitor",
+    "mobile",
+    "cross-platform",
     "typescript",
     "types",
-    "tests",
+    "forms",
+    "validation",
+    "storage",
+    "hooks",
     "aoneahsan",
-    "ahsan mahmood",
-    "zaions packages"
+    "ahsan mahmood"
   ],
   "author": {
-    "name": "Zaions",
-    "email": "admin@zaions.com",
-    "url": "https://zaions.com/bio"
+    "name": "Ahsan Mahmood",
+    "email": "aoneahsan@gmail.com",
+    "url": "https://aoneahsan.com"
   },
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zaions/react-tool-kit/issues"
+    "url": "https://github.com/aoneahsan/react-buildkit/issues"
   },
-  "homepage": "https://github.com/zaions/react-tool-kit#readme",
+  "homepage": "https://github.com/aoneahsan/react-buildkit#readme",
   "engines": {
     "npm": ">=10.7.0",
     "yarn": ">=1.22.22"
@@ -93,9 +96,6 @@
     "react-responsive": {
       "optional": true
     },
-    "zaions-tool-kit": {
-      "optional": false
-    },
     "crypto-js": {
       "optional": true
     },
@@ -107,46 +107,46 @@
     }
   },
   "peerDependencies": {
-    "@capacitor/browser": "^6.0.5",
+    "@capacitor/browser": "^7.0.1",
     "@capacitor/clipboard": "^7.0.1",
-    "@capacitor/core": "^6.2.1",
-    "@capacitor/dialog": "^6.0.2",
+    "@capacitor/core": "^7.4.2",
+    "@capacitor/dialog": "^7.0.1",
     "@capacitor/geolocation": "^7.1.1",
     "@capacitor/preferences": "^7.0.1",
     "@capacitor/toast": "^7.0.1",
     "classnames": "^2.5.1",
+    "crypto-js": "^4.2.0",
+    "dayjs": "^1.11.13",
     "formik": "^2.4.6",
     "react": "^18.3.1 | ^19.1.0",
     "react-dropzone": "^14.3.8",
     "react-responsive": "^10.0.1",
-    "crypto-js": "^4.2.0",
-    "dayjs": "^1.11.13",
-    "zod": "^3.24.3",
-    "zaions-tool-kit": "^0.0.115"
+    "zod": "^4.0.5"
   },
   "devDependencies": {
-    "@capacitor/browser": "^6.0.5",
+    "@capacitor/browser": "^7.0.1",
     "@capacitor/clipboard": "^7.0.1",
-    "@capacitor/core": "^6.2.1",
-    "@capacitor/dialog": "^6.0.2",
+    "@capacitor/core": "^7.4.2",
+    "@capacitor/dialog": "^7.0.1",
     "@capacitor/geolocation": "^7.1.1",
     "@capacitor/preferences": "^7.0.1",
     "@capacitor/toast": "^7.0.1",
-    "@types/node": "^22.14.1",
-    "@types/react": "^19.1.2",
+    "@types/jsdom": "^21.1.7",
+    "@types/node": "^24.0.13",
+    "@types/react": "^19.1.8",
     "classnames": "^2.5.1",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",
     "formik": "^2.4.6",
+    "jsdom": "^26.1.0",
     "react": "^19.1.0",
     "react-dropzone": "^14.3.8",
     "react-responsive": "^10.0.1",
     "ts-node": "^10.9.2",
-    "tsup": "^8.4.0",
+    "tsup": "^8.5.0",
     "typescript": "^5.8.3",
     "vitest": "^2.1.9",
-    "zaions-tool-kit": "^0.0.115",
-    "zod": "^3.24.3"
+    "zod": "^4.0.5"
   },
   "contributors": [
     {
@@ -155,11 +155,11 @@
       "url": "https://aoneahsan.com"
     }
   ],
-  "displayName": "Zaions Tool Kit",
+  "displayName": "React BuildKit",
   "engineStrict": true,
   "funding": {
     "type": "individual",
-    "url": "https://www.patreon.com/zaions"
+    "url": "https://github.com/sponsors/aoneahsan"
   },
   "private": false,
   "pricing": "Free",

@@ -5,11 +5,8 @@ import { Geolocation } from '@capacitor/geolocation';
 import { Preferences } from '@capacitor/preferences';
 import { Toast } from '@capacitor/toast';
 import { ToastDurationEnum, ToastPositionEnum } from '@enums/capacitorApis';
-import { LinkTargetEnum, ztkMessages } from 'zaions-tool-kit';
-import {
-  decryptData,
-  encryptData,
-} from 'zaions-tool-kit/dist/require-package/crypto-js';
+import { LinkTargetEnum, ztkMessages } from '@enums/common';
+import { decryptData, encryptData } from '@utils/helpers/crypto';
 
 export const showToast = async (
   message: string = ztkMessages.general.success,
@@ -26,7 +23,7 @@ export const showToast = async (
 export const BROWSER = {
   open: async (
     url: string,
-    target: LinkTargetEnum = LinkTargetEnum.blank
+    target: LinkTargetEnum = LinkTargetEnum.BLANK
   ): Promise<void> => {
     try {
       await Browser.open({
@@ -43,12 +40,12 @@ export const BROWSER = {
  * Utility object for handling secure storage operations.
  */
 export const STORAGE = {
-  get: async <T>(key: string): Promise<T | null> => {
+  get: async (key: string): Promise<any | null> => {
     try {
       const _val = (await Preferences.get({ key })).value;
 
       if (_val) {
-        return decryptData<T>(_val);
+        return decryptData(_val);
       }
       return null;
     } catch (error) {

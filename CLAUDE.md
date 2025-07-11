@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is the `zaions-react-tool-kit` package - a TypeScript utility library for React applications with strong Capacitor integration for cross-platform mobile development. It provides helper functions, hooks, and utilities (NOT UI components - those are in zaions-react-ui-kit).
+This is the `react-buildkit` package - a TypeScript utility library for React applications with strong Capacitor integration for cross-platform mobile development. It provides helper functions, hooks, and utilities (NOT UI components - those are in a separate UI kit package).
 
 ## Development Commands
 
@@ -24,8 +24,8 @@ yarn test
 # Deploy to npm (builds and publishes)
 yarn deploy
 
-# Link zaions-tool-kit dependency
-yarn update:linked-packages
+# Install dependencies  
+yarn install
 
 # Serve with linked packages
 yarn serve
@@ -84,7 +84,7 @@ Key build features:
 
 ## Dependencies
 
-This package requires `zaions-tool-kit` as a peer dependency. React 18.3.1+ or 19.1.0+ is also required.
+This package requires React 18.3.1+ or 19.1.0+ as a peer dependency.
 
 ## Mobile Development Focus
 

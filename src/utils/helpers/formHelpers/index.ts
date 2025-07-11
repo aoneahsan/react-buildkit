@@ -6,7 +6,7 @@ import {
   validateEmail,
   validatePhoneNumber,
   validateURL,
-} from 'zaions-tool-kit';
+} from '@utils/helpers/common';
 
 export const formatFormErrorsFromApiResponse = (
   errors: Record<string, string> | null

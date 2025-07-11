@@ -12,7 +12,9 @@ export const clearAuthDataFromLocalStorage = async (): Promise<void> => {
       STORAGE.remove(LOCALSTORAGE_KEYS.userData),
       STORAGE.remove(LOCALSTORAGE_KEYS.userAuthToken),
     ]);
-  } catch (error) {}
+  } catch (error) {
+    console.error('Failed to clear auth data from storage:', error);
+  }
 };
 
 export const setAuthDataInLocalStorage = async ({
@@ -34,7 +36,7 @@ export const setAuthDataInLocalStorage = async ({
 export const getAuthTokenFromLocalStorage = async (): Promise<
   string | null
 > => {
-  return await STORAGE.get<string>(LOCALSTORAGE_KEYS.userAuthToken);
+  return await STORAGE.get(LOCALSTORAGE_KEYS.userAuthToken);
 };
 
 export const getAuthDataFromLocalStorage = async (): Promise<{
@@ -42,7 +44,7 @@ export const getAuthDataFromLocalStorage = async (): Promise<{
   authToken: string | null;
 } | null> => {
   try {
-    const userData = await STORAGE.get<IUser>(LOCALSTORAGE_KEYS.userData);
+    const userData = await STORAGE.get(LOCALSTORAGE_KEYS.userData) as IUser | null;
     const authToken = await getAuthTokenFromLocalStorage();
 
     return { userData, authToken };

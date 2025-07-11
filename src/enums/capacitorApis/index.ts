@@ -1,4 +1,4 @@
-import { checkForDuplicateEnumValues } from 'zaions-tool-kit';
+import { checkForDuplicateEnumValues } from '@utils/helpers/common';
 
 export enum ToastDurationEnum {
   long = 'long',

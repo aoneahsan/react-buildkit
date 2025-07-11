@@ -1,5 +1,5 @@
 import { ZFilterOptions, ZPaginationInfoI } from '@src/types/paginationFilters';
-import { ZTotalPages } from 'zaions-tool-kit';
+import { ZTotalPages } from '@utils/helpers/common';
 
 export const truncateText = (str?: string, length: number = 250): string => {
   if (str && str.length <= length) {

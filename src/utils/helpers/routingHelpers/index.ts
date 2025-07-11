@@ -1,9 +1,6 @@
 import { APP_ROUTES } from '@utils/constants/generic';
-import { SearchParamKeysEnum } from 'zaions-tool-kit';
-import {
-  decryptData,
-  encryptData,
-} from 'zaions-tool-kit/dist/require-package/crypto-js';
+import { SearchParamKeysEnum } from '@enums/common';
+import { decryptData, encryptData } from '@utils/helpers/crypto';
 
 export const setSearchParamsData = (
   data: unknown,
@@ -19,7 +16,9 @@ export const setSearchParamsData = (
         [SearchParamKeysEnum.encryptedDataSearchParam]: _encryptedData,
       });
     }
-  } catch (error) {}
+  } catch (error) {
+    console.error('Failed to set search params data:', error);
+  }
 };
 
 export const getSearchParamsData = <T>(
@@ -30,7 +29,7 @@ export const getSearchParamsData = <T>(
       SearchParamKeysEnum.encryptedDataSearchParam
     );
     if (_data) {
-      return decryptData<T>(_data);
+      return decryptData(_data) as T;
     } else {
       return null;
     }

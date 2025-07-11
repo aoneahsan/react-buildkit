@@ -5,11 +5,11 @@ export const getTestingAttribute = (
   const res: Record<string, string> = {};
 
   // selector for non-list items or generic selector for list items
-  res['zaions-ets'] = selector;
+  res['data-testid'] = selector;
 
   if (listItemSelector) {
     // list item id/specific selector
-    res['zaions-lets'] = listItemSelector;
+    res['data-test-item'] = listItemSelector;
   }
 
   return res;

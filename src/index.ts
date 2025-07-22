@@ -1,5 +1,12 @@
 export { configureZRTK } from './configure';
 export { ToastDurationEnum, ToastPositionEnum } from './enums/capacitorApis';
+export { 
+  ResponseCodeEnum, 
+  ResponseStatusEnum, 
+  LinkTargetEnum, 
+  SearchParamKeysEnum, 
+  ztkMessages 
+} from './enums/common';
 export { CONTAINS, zValidationRuleE } from './enums/generic';
 export { ReactToastifyTypeEnum } from './enums/reactPackages';
 export { TableIdsEnum } from './enums/table';
@@ -61,12 +68,21 @@ export {
   zCheckPermissions,
   zGetCurrentPosition,
   zWriteToClipboard,
+  // Export new interface types
+  type StorageOptions,
+  type ZAlertOptions,
+  type ZConfirmOptions,
+  type ZPromptOptions,
+  type ZClipboardWriteOptions,
+  type ZGeolocationOptions,
 } from './utils/helpers/capacitorApis';
 export {
   checkIfContains,
   formatFormErrorsFromApiResponse,
   validateField,
   validateFields,
+  // Export new interface type
+  type ValidateFieldOptions,
 } from './utils/helpers/formHelpers';
 export {
   ZFilterAndPaginateData,
@@ -75,6 +91,8 @@ export {
   getRandomId,
   toTitleCase,
   truncateText,
+  // Export new interface type
+  type ZPaginateOptions,
 } from './utils/helpers/generic';
 export {
   clearAuthDataFromLocalStorage,
@@ -87,8 +105,33 @@ export {
   formatRoutesMatchResult,
   getSearchParamsData,
   setSearchParamsData,
+  // Export new interface types
+  type SetSearchParamsOptions,
+  type GetSearchParamsOptions,
 } from './utils/helpers/routingHelpers';
 export { getTestingAttribute } from './utils/helpers/testingHelpers';
-export { useZMediaQueryScale } from './utils/hooks/helpers';
+export { 
+  useZMediaQueryScale,
+  // Export new interface type
+  type MediaQueryScaleOptions,
+} from './utils/hooks/helpers';
 export { zrtkMessages } from './utils/messages';
 export { reportError } from './utils/reportError';
+
+// Export crypto utilities
+export {
+  encryptData,
+  decryptData,
+  hashData,
+  generateSecretKey,
+} from './utils/helpers/crypto';
+
+// Export common helper functions
+export {
+  checkForDuplicateEnumValues,
+  convertToTitleCase,
+  validateEmail,
+  validatePhoneNumber,
+  validateURL,
+  ZTotalPages,
+} from './utils/helpers/common';

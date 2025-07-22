@@ -194,26 +194,40 @@ const { getRootProps, getInputProps, isDragActive } = useZDropzone({
 });
 ```
 
-### `useZMediaQueryScale()`
-Hook for responsive design with media queries.
+### `useZMediaQueryScale(options?: MediaQueryScaleOptions)`
+Hook for responsive design with customizable media queries.
 
 ```typescript
-const { scale, screenWidth, isMobile, isTablet, isDesktop } = useZMediaQueryScale();
+// Basic usage
+const mediaQueries = useZMediaQueryScale();
+
+// With custom breakpoints
+const mediaQueries = useZMediaQueryScale({
+  breakpoints: {
+    brackpoint_md: '768px',
+    brackpoint_lg: '1200px'
+  },
+  customBreakpoints: {
+    tablet: '834px',
+    desktop: '1440px',
+    ultrawide: '2560px'
+  },
+  queryOptions: {
+    orientation: 'landscape'
+  }
+});
+
+// Access results
+if (mediaQueries.isTablet) {
+  // Tablet-specific logic
+}
 ```
 
 **Returns:**
-- `scale` - Current scale value
-- `screenWidth` - Current screen width
-- `defaultScale` - Default scale value
-- `largeScale` - Large scale value
-- `extraLargeScale` - Extra large scale value
-- `isMobile` - Is mobile device
-- `isTablet` - Is tablet device
-- `isLaptop` - Is laptop
-- `isDesktop` - Is desktop
-- `isFullHDDesktop` - Is Full HD desktop
-- `is2KDesktop` - Is 2K desktop
-- `is4KDesktop` - Is 4K desktop
+- All standard breakpoint checks (is2XlScale, isXlScale, isLgScale, etc.)
+- Below breakpoint checks (isBelow2XlScale, isBelowXlScale, etc.)
+- Fixed pixel breakpoints (is1300pxScale, is1200pxScale, etc.)
+- Custom breakpoint results (based on your customBreakpoints)
 
 ## Helper Functions
 
@@ -236,52 +250,90 @@ Returns true if running in hybrid mode.
 
 ### Capacitor APIs
 
-#### `showToast(message?, duration?, position?): Promise<void>`
-Shows a native toast notification.
+#### `showToast(message?, options?): Promise<void>`
+Shows a native toast notification with customizable options.
 
 ```typescript
-await showToast('Hello World', ToastDurationEnum.long, ToastPositionEnum.bottom);
+// Simple usage
+await showToast('Hello World');
+
+// With options
+await showToast('Hello World', {
+  duration: ToastDurationEnum.long,
+  position: ToastPositionEnum.bottom,
+  // Any additional native Toast options
+});
 ```
 
-#### `showZAlert({ title?, message? }): Promise<void>`
-Shows a native alert dialog.
+#### `showZAlert(options?: ZAlertOptions): Promise<void>`
+Shows a native alert dialog with customizable options.
 
 ```typescript
 await showZAlert({ 
   title: 'Alert', 
-  message: 'This is an alert message' 
+  message: 'This is an alert message',
+  buttonTitle: 'Got it!'
+  // Any additional native Dialog options
 });
 ```
 
-#### `showZConfirm({ title?, message? }): Promise<boolean>`
-Shows a native confirmation dialog.
+#### `showZConfirm(options?: ZConfirmOptions): Promise<{ value: boolean }>`
+Shows a native confirmation dialog with customizable options.
 
 ```typescript
-const confirmed = await showZConfirm({ 
+const { value } = await showZConfirm({ 
   title: 'Confirm', 
-  message: 'Are you sure?' 
+  message: 'Are you sure?',
+  okButtonTitle: 'Yes, Delete',
+  cancelButtonTitle: 'Keep It'
+  // Any additional native Dialog options
 });
 ```
 
-#### `showZPrompt({ title?, message?, okButtonTitle?, cancelButtonTitle?, inputPlaceholder?, inputText? }): Promise<{ value: string; cancelled: boolean }>`
-Shows a native prompt dialog.
+#### `showZPrompt(options?: ZPromptOptions): Promise<{ value: string; cancelled: boolean }>`
+Shows a native prompt dialog with full customization.
 
 ```typescript
 const result = await showZPrompt({ 
   title: 'Enter Name', 
   message: 'Please enter your name',
-  inputPlaceholder: 'John Doe'
+  inputPlaceholder: 'John Doe',
+  inputText: 'Default Value',
+  okButtonTitle: 'Save',
+  cancelButtonTitle: 'Discard'
+  // Any additional native Dialog options
 });
 ```
 
-#### `zWriteToClipboard(value: string): Promise<void>`
-Writes text to clipboard.
+#### `zWriteToClipboard(value: string | ZClipboardWriteOptions): Promise<void>`
+Writes content to clipboard with support for multiple formats.
+
+```typescript
+// Simple text
+await zWriteToClipboard('Hello World');
+
+// Advanced options
+await zWriteToClipboard({
+  string: 'Hello World',
+  label: 'Greeting',
+  // Additional clipboard options
+});
+```
 
 #### `zCheckClipboard(): Promise<{ value: string; type: string }>`
 Reads clipboard content.
 
-#### `zGetCurrentPosition(): Promise<GeolocationPosition>`
-Gets current geolocation.
+#### `zGetCurrentPosition(options?: ZGeolocationOptions): Promise<GeolocationPosition>`
+Gets current geolocation with customizable accuracy and timeout.
+
+```typescript
+const position = await zGetCurrentPosition({
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 60000
+  // Any additional native Geolocation options
+});
+```
 
 #### `zCheckPermissions(): Promise<PermissionStatus>`
 Checks geolocation permissions.
@@ -297,16 +349,38 @@ await BROWSER.open('https://example.com', LinkTargetEnum.BLANK);
 
 ### Storage Helper
 
-#### `STORAGE.get(key: string): Promise<any | null>`
-Gets encrypted data from storage.
+#### `STORAGE.get(key: string, options?: StorageOptions): Promise<any | null>`
+Gets data from storage with optional encryption.
 
-#### `STORAGE.set(key: string, data: unknown): Promise<void>`
-Sets encrypted data in storage.
+```typescript
+// Get encrypted data (default)
+const userData = await STORAGE.get('user');
 
-#### `STORAGE.remove(key: string): Promise<void>`
+// Get unencrypted data
+const settings = await STORAGE.get('settings', { encrypt: false });
+
+// Use mobile storage group
+const data = await STORAGE.get('key', { group: 'myapp.settings' });
+```
+
+#### `STORAGE.set(key: string, data: unknown, options?: StorageOptions): Promise<void>`
+Sets data in storage with optional encryption.
+
+```typescript
+// Set encrypted data (default)
+await STORAGE.set('user', userData);
+
+// Set unencrypted data
+await STORAGE.set('theme', 'dark', { encrypt: false });
+
+// Use mobile storage group
+await STORAGE.set('key', data, { group: 'myapp.settings' });
+```
+
+#### `STORAGE.remove(key: string, options?: StorageOptions): Promise<void>`
 Removes data from storage.
 
-#### `STORAGE.clear(): Promise<void>`
+#### `STORAGE.clear(options?: StorageOptions): Promise<void>`
 Clears all storage data.
 
 ### Form Helpers
@@ -322,12 +396,34 @@ checkIfContains('abc123', CONTAINS.number); // true
 checkIfContains('abc', CONTAINS.number); // false
 ```
 
-#### `validateField(value: any, validationRule?: zValidationRuleE, fieldName?: string): string | null`
-Validates a single form field.
+#### `validateField(fieldKey: string, values: Record<string, unknown>, errorsObj: Record<string, unknown>, validationRule?: zValidationRuleE, options?: ValidateFieldOptions): void`
+Validates a single form field with customizable messages and rules.
 
 ```typescript
-const error = validateField('test@example', zValidationRuleE.email);
+const errors = {};
+const values = { email: 'test@example' };
+
+// Basic validation
+validateField('email', values, errors, zValidationRuleE.email);
+
+// With custom messages
+validateField('email', values, errors, zValidationRuleE.email, {
+  messages: {
+    email: 'Please enter a valid company email'
+  }
+});
+
+// With custom validator
+validateField('username', values, errors, undefined, {
+  customValidator: (value) => {
+    if (value.length < 3) return 'Username too short';
+    return undefined;
+  }
+});
 ```
+
+#### `validateFields(fieldKeys: string[], values: Record<string, unknown>, errorsObj: Record<string, unknown>, validationRules: zValidationRuleE[], options?: ValidateFieldOptions): void`
+Validates multiple fields at once.
 
 #### `validateFields(values: Record<string, any>, validationRules: Record<string, zValidationRuleE | undefined>): Record<string, string>`
 Validates multiple form fields.
@@ -425,11 +521,39 @@ Gets all authentication data from storage.
 
 ### Routing Helpers
 
-#### `setSearchParamsData(data: unknown, setSearchParams: Function): void`
-Sets encrypted data in URL search params.
+#### `setSearchParamsData(data: unknown, setSearchParams: Function, options?: SetSearchParamsOptions): void`
+Sets data in URL search params with optional encryption.
 
-#### `getSearchParamsData<T>(searchParams: URLSearchParams): T | null`
-Gets and decrypts data from URL search params.
+```typescript
+// Set encrypted data (default)
+setSearchParamsData({ filter: 'active' }, setSearchParams);
+
+// Set unencrypted data
+setSearchParamsData({ page: 1 }, setSearchParams, { encrypt: false });
+
+// Use custom param key
+setSearchParamsData(data, setSearchParams, { 
+  paramKey: 'state',
+  encrypt: false 
+});
+```
+
+#### `getSearchParamsData<T>(searchParams: URLSearchParams, options?: GetSearchParamsOptions): T | null`
+Gets data from URL search params with optional decryption.
+
+```typescript
+// Get encrypted data (default)
+const data = getSearchParamsData<FilterData>(searchParams);
+
+// Get unencrypted data
+const page = getSearchParamsData<number>(searchParams, { encrypt: false });
+
+// Use custom param key
+const state = getSearchParamsData(searchParams, { 
+  paramKey: 'state',
+  encrypt: false 
+});
+```
 
 #### `addQueryParamsInUrl(url: string, queryParams: Record<string, string> | null): string`
 Adds query parameters to URL.
@@ -470,6 +594,105 @@ interface IApiResponse<T> {
   success: boolean;
   status: ResponseStatusEnum;
   code: ResponseCodeEnum;
+}
+```
+
+### Option Interfaces
+
+```typescript
+interface StorageOptions {
+  encrypt?: boolean; // Whether to encrypt data (default: true)
+  group?: string; // Group/namespace for preferences (mobile only)
+}
+
+interface ZAlertOptions {
+  title?: string;
+  message?: string;
+  buttonTitle?: string;
+  [key: string]: any; // Additional native options
+}
+
+interface ZConfirmOptions {
+  title?: string;
+  message?: string;
+  okButtonTitle?: string;
+  cancelButtonTitle?: string;
+  [key: string]: any;
+}
+
+interface ZPromptOptions {
+  title?: string;
+  message?: string;
+  okButtonTitle?: string;
+  cancelButtonTitle?: string;
+  inputPlaceholder?: string;
+  inputText?: string;
+  [key: string]: any;
+}
+
+interface ZClipboardWriteOptions {
+  string?: string;
+  image?: string;
+  url?: string;
+  label?: string;
+  [key: string]: any;
+}
+
+interface ZGeolocationOptions {
+  enableHighAccuracy?: boolean;
+  timeout?: number;
+  maximumAge?: number;
+  [key: string]: any;
+}
+
+interface ValidateFieldOptions {
+  messages?: {
+    required?: string;
+    email?: string;
+    password?: {
+      minLength?: string;
+      needsNumber?: string;
+      needsLetter?: string;
+      needsSpecialChar?: string;
+    };
+    url?: string;
+    phoneNumber?: string;
+    otp?: string;
+  };
+  minCharacter?: number;
+  customValidator?: (value: string) => string | undefined;
+}
+
+interface SetSearchParamsOptions {
+  encrypt?: boolean;
+  paramKey?: string;
+}
+
+interface GetSearchParamsOptions {
+  encrypt?: boolean;
+  paramKey?: string;
+}
+
+interface MediaQueryScaleOptions {
+  breakpoints?: {
+    brackpoint_2xl?: string;
+    brackpoint_xl?: string;
+    brackpoint_lg?: string;
+    brackpoint_md?: string;
+    brackpoint_sm?: string;
+    brackpoint_xs?: string;
+  };
+  customBreakpoints?: Record<string, string>;
+  queryOptions?: {
+    orientation?: 'portrait' | 'landscape';
+    [key: string]: any;
+  };
+}
+
+interface ZPaginateOptions {
+  delta?: number;
+  dotsString?: string;
+  showBoundaries?: boolean;
 }
 ```
 

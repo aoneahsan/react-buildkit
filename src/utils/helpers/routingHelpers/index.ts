@@ -2,18 +2,33 @@ import { APP_ROUTES } from '@utils/constants/generic';
 import { SearchParamKeysEnum } from '@enums/common';
 import { decryptData, encryptData } from '@utils/helpers/crypto';
 
+/**
+ * Options for setting search params data
+ */
+export interface SetSearchParamsOptions {
+  /** Whether to encrypt the data (default: true) */
+  encrypt?: boolean;
+  /** Custom search param key to use instead of default */
+  paramKey?: string;
+}
+
 export const setSearchParamsData = (
   data: unknown,
   setSearchParams: (
     nextInit?: any, // this type is from react router and i don't want to install the types of react router just to give that here, as we are not even using it below
     navigateOpts?: undefined
-  ) => void
+  ) => void,
+  options?: SetSearchParamsOptions
 ): void => {
   try {
-    const _encryptedData = encryptData(data);
-    if (_encryptedData) {
+    const shouldEncrypt = options?.encrypt !== false; // Default true
+    const paramKey = options?.paramKey || SearchParamKeysEnum.encryptedDataSearchParam;
+    
+    const value = shouldEncrypt ? encryptData(data) : JSON.stringify(data);
+    
+    if (value) {
       setSearchParams({
-        [SearchParamKeysEnum.encryptedDataSearchParam]: _encryptedData,
+        [paramKey]: value,
       });
     }
   } catch (error) {
@@ -21,15 +36,28 @@ export const setSearchParamsData = (
   }
 };
 
+/**
+ * Options for getting search params data
+ */
+export interface GetSearchParamsOptions {
+  /** Whether the data is encrypted (default: true) */
+  encrypt?: boolean;
+  /** Custom search param key to use instead of default */
+  paramKey?: string;
+}
+
 export const getSearchParamsData = <T>(
-  searchParams: URLSearchParams
+  searchParams: URLSearchParams,
+  options?: GetSearchParamsOptions
 ): T | null => {
   try {
-    const _data = searchParams.get(
-      SearchParamKeysEnum.encryptedDataSearchParam
-    );
+    const shouldDecrypt = options?.encrypt !== false; // Default true
+    const paramKey = options?.paramKey || SearchParamKeysEnum.encryptedDataSearchParam;
+    
+    const _data = searchParams.get(paramKey);
+    
     if (_data) {
-      return decryptData(_data) as T;
+      return shouldDecrypt ? decryptData(_data) as T : JSON.parse(_data) as T;
     } else {
       return null;
     }

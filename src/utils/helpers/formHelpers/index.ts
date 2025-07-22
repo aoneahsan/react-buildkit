@@ -34,7 +34,8 @@ export const formatFormErrorsFromApiResponse = (
  */
 export const checkIfContains = (
   val: string,
-  contains: CONTAINS = CONTAINS.number
+  contains: CONTAINS = CONTAINS.number,
+  minCharacter?: number
 ): boolean => {
   switch (contains) {
     case CONTAINS.number:
@@ -44,12 +45,36 @@ export const checkIfContains = (
     case CONTAINS.specialSymbol:
       return /[\W_]+/.test(val);
     case CONTAINS.minCharacter:
-      return val.length >= defaultValues.minCharacter;
+      return val.length >= (minCharacter || defaultValues.minCharacter);
 
     default:
       return /\d/.test(val);
   }
 };
+
+/**
+ * Validation options for field validation
+ */
+export interface ValidateFieldOptions {
+  /** Custom validation messages */
+  messages?: {
+    required?: string;
+    email?: string;
+    password?: {
+      minLength?: string;
+      needsNumber?: string;
+      needsLetter?: string;
+      needsSpecialChar?: string;
+    };
+    url?: string;
+    phoneNumber?: string;
+    otp?: string;
+  };
+  /** Minimum character length for password/OTP validation */
+  minCharacter?: number;
+  /** Custom validation function */
+  customValidator?: (value: string) => string | undefined;
+}
 
 /**
  * Validates a specific field based on the specified validation rule and updates the errors object accordingly.
@@ -58,57 +83,66 @@ export const checkIfContains = (
  * @param values - The object containing field values.
  * @param errorsObj - The object containing errors for each field.
  * @param validationRule - The validation rule to be applied.
+ * @param options - Optional configuration for validation
  */
 export const validateField = (
   fieldKey: string,
   values: Record<string, unknown>,
   errorsObj: Record<string, unknown>,
-  validationRule: zValidationRuleE = zValidationRuleE.string
+  validationRule: zValidationRuleE = zValidationRuleE.string,
+  options?: ValidateFieldOptions
 ): void => {
   const _fieldKeyTitleCase = convertToTitleCase(fieldKey);
   const _val = String(values[fieldKey])?.trim();
+  const minChar = options?.minCharacter || defaultValues.minCharacter;
+  
+  // Apply custom validator first if provided
+  if (options?.customValidator) {
+    const customError = options.customValidator(_val);
+    if (customError) {
+      errorsObj[fieldKey] = customError;
+      return;
+    }
+  }
+  
   /**
-   * Checking in the field key is empty then give `fieldKey is required` error message (generally for every field)
+   * Checking if the field key is empty then give required error message
    */
   if (
     !Object.prototype.hasOwnProperty.call(values, fieldKey) ||
     _val.length === 0
   ) {
-    errorsObj[fieldKey] = `${_fieldKeyTitleCase} is required`;
+    errorsObj[fieldKey] = options?.messages?.required || `${_fieldKeyTitleCase} is required`;
   } else if (
     validationRule === zValidationRuleE.email &&
     !validateEmail(_val)
   ) {
-    errorsObj[fieldKey] = `${_fieldKeyTitleCase} needs to be a valid email.`;
+    errorsObj[fieldKey] = options?.messages?.email || `${_fieldKeyTitleCase} needs to be a valid email.`;
   } else if (validationRule === zValidationRuleE.password) {
-    if (!checkIfContains(_val, CONTAINS.minCharacter)) {
-      errorsObj[
-        fieldKey
-      ] = `${_fieldKeyTitleCase} needs to be at least ${defaultValues.minCharacter} digits long.`;
+    if (_val.length < minChar) {
+      errorsObj[fieldKey] = options?.messages?.password?.minLength || 
+        `${_fieldKeyTitleCase} needs to be at least ${minChar} characters long.`;
     } else if (!checkIfContains(_val, CONTAINS.number)) {
-      errorsObj[fieldKey] = `${_fieldKeyTitleCase} must include a digit.`;
+      errorsObj[fieldKey] = options?.messages?.password?.needsNumber || 
+        `${_fieldKeyTitleCase} must include a digit.`;
     } else if (!checkIfContains(_val, CONTAINS.letter)) {
-      errorsObj[fieldKey] = `${_fieldKeyTitleCase} must include a letter.`;
+      errorsObj[fieldKey] = options?.messages?.password?.needsLetter || 
+        `${_fieldKeyTitleCase} must include a letter.`;
     } else if (!checkIfContains(_val, CONTAINS.specialSymbol)) {
-      errorsObj[
-        fieldKey
-      ] = `${_fieldKeyTitleCase} must include a special character.`;
+      errorsObj[fieldKey] = options?.messages?.password?.needsSpecialChar || 
+        `${_fieldKeyTitleCase} must include a special character.`;
     }
   } else if (validationRule === zValidationRuleE.url && !validateURL(_val)) {
-    errorsObj[fieldKey] = formValidations.urlIncorrectFormate;
+    errorsObj[fieldKey] = options?.messages?.url || formValidations.urlIncorrectFormate;
   } else if (
     validationRule === zValidationRuleE.phoneNumber &&
     !validatePhoneNumber(_val)
   ) {
-    errorsObj[fieldKey] = formValidations.phoneNumberRequired;
+    errorsObj[fieldKey] = options?.messages?.phoneNumber || formValidations.phoneNumberRequired;
   } else if (validationRule === zValidationRuleE.otp) {
-    if (
-      !checkIfContains(_val, CONTAINS.minCharacter) ||
-      _val?.length > defaultValues.minCharacter
-    ) {
-      errorsObj[
-        fieldKey
-      ] = `${_fieldKeyTitleCase} needs to be ${defaultValues.minCharacter} digits`;
+    if (_val?.length !== minChar) {
+      errorsObj[fieldKey] = options?.messages?.otp || 
+        `${_fieldKeyTitleCase} needs to be exactly ${minChar} digits`;
     }
   }
 };
@@ -120,13 +154,15 @@ export const validateField = (
  * @param values - The object containing field values.
  * @param errorsObj - The object containing errors for each field.
  * @param validationRules - An array of validation rules corresponding to the field keys.
+ * @param options - Optional configuration for validation (applied to all fields)
  * for single filed validation use validateField function
  */
 export const validateFields = (
   fieldKeys: string[],
   values: Record<string, unknown>,
   errorsObj: Record<string, unknown>,
-  validationRules: zValidationRuleE[]
+  validationRules: zValidationRuleE[],
+  options?: ValidateFieldOptions
 ): void => {
   if (fieldKeys.length !== validationRules.length) {
     alert({
@@ -138,6 +174,6 @@ export const validateFields = (
   for (let i = 0; i < fieldKeys.length; i++) {
     const _field = fieldKeys[i];
     const _rule = validationRules[i];
-    validateField(_field, values, errorsObj, _rule);
+    validateField(_field, values, errorsObj, _rule, options);
   }
 };

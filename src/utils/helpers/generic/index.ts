@@ -27,14 +27,29 @@ export const toTitleCase = (str: string): string => {
  * @param total The total number of pages.
  * @returns An object containing the pagination range and range with dots.
  */
+/**
+ * Pagination options
+ */
+export interface ZPaginateOptions {
+  /** Number of pages to show around the current page (default: 2) */
+  delta?: number;
+  /** Custom dots string (default: '...') */
+  dotsString?: string;
+  /** Whether to always show first and last pages (default: true) */
+  showBoundaries?: boolean;
+}
+
 export const ZPaginate = (
   current: number,
-  total: number
+  total: number,
+  options?: ZPaginateOptions
 ): {
   range: number[];
   rangeWithDots: Array<string | number>;
 } => {
-  const delta = 2;
+  const delta = options?.delta ?? 2;
+  const dotsString = options?.dotsString ?? '...';
+  const showBoundaries = options?.showBoundaries !== false; // Default true
   const left = current - delta;
   const right = current + delta;
   const range: number[] = [];
@@ -42,7 +57,10 @@ export const ZPaginate = (
   let previousPage = 0;
 
   for (let i = 1; i <= total; i++) {
-    if (i === 1 || i === total || (i > left && i < right)) {
+    const isFirstOrLast = i === 1 || i === total;
+    const isInRange = i > left && i < right;
+    
+    if ((showBoundaries && isFirstOrLast) || isInRange || (!showBoundaries && isInRange)) {
       range.push(i);
     }
   }
@@ -52,7 +70,7 @@ export const ZPaginate = (
       if (currentPage - previousPage === 2) {
         rangeWithDots.push(previousPage + 1);
       } else if (currentPage - previousPage !== 1) {
-        rangeWithDots.push('...');
+        rangeWithDots.push(dotsString);
       }
     }
     rangeWithDots.push(currentPage);

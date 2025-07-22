@@ -15,7 +15,7 @@ A comprehensive TypeScript utility library for React applications with Capacitor
 ## 📚 Documentation
 
 - **[Getting Started Guide](./docs/getting-started.md)** - Installation, setup, and first usage
-- **[API Reference](./API.md)** - Complete list of all exports with descriptions
+- **[API Reference](./docs/API.md)** - Complete list of all exports with descriptions
 - **[Core Concepts](./docs/core-concepts.md)** - Understanding the library architecture
 - **[Examples](./docs/examples.md)** - Real-world usage examples
 - **[Migration Guide](./docs/migration-guide.md)** - Migrating from ts-react-toolkits
